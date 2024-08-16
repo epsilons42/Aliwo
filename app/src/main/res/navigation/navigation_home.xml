@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/navigation_home"
+    app:startDestination="@id/productChildFragment">
+
+    <fragment
+        android:id="@+id/productDetailFragment"
+        android:name="com.example.aliwo.view.fragment.ProductDetailFragment"
+        android:label="fragment_product_detail"
+        tools:layout="@layout/fragment_product_detail">
+        <action
+            android:id="@+id/action_productDetailFragment_to_productSearchFragment"
+            app:destination="@id/productSearchFragment" />
+        <argument
+            android:name="id"
+            app:argType="long" />
+        <argument
+            android:name="title"
+            app:argType="string" />
+        <argument
+            android:name="price"
+            app:argType="float" />
+        <argument
+            android:name="description"
+            app:argType="string" />
+        <argument
+            android:name="category"
+            app:argType="string" />
+        <argument
+            android:name="image"
+            app:argType="string" />
+        <argument
+            android:name="rate"
+            app:argType="float" />
+
+    </fragment>
+    <fragment
+        android:id="@+id/productCategoryFragment"
+        android:name="com.example.aliwo.view.fragment.ProductCategoryFragment"
+        android:label="fragment_product_category"
+        tools:layout="@layout/fragment_product_category">
+        <argument
+            android:name="category"
+            app:argType="string" />
+        <argument
+            android:name="categoryTitle"
+            app:argType="string" />
+        <action
+            android:id="@+id/action_productCategoryFragment_to_productDetailFragment"
+            app:destination="@id/productDetailFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/productChildFragment"
+        android:name="com.example.aliwo.view.fragment.ProductChildFragment"
+        android:label="fragment_product_child"
+        tools:layout="@layout/fragment_product_child" >
+        <action
+            android:id="@+id/action_productChildFragment_to_productCategoryFragment"
+            app:destination="@id/productCategoryFragment" />
+        <action
+            android:id="@+id/toProductDetail"
+            app:destination="@id/productDetailFragment" />
+        <action
+            android:id="@+id/action_productChildFragment_to_searchFragment"
+            app:destination="@id/searchFragment" />
+        <action
+            android:id="@+id/action_productChildFragment_to_notificationFragment"
+            app:destination="@id/notificationFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/productSearchFragment"
+        android:name="com.example.aliwo.view.fragment.ProductSearchFragment"
+        android:label="fragment_product_search"
+        tools:layout="@layout/fragment_product_search" >
+        <action
+            android:id="@+id/action_productSearchFragment_to_productDetailFragment"
+            app:destination="@id/productDetailFragment" />
+        <argument
+            android:name="category"
+            app:argType="string" />
+        <action
+            android:id="@+id/action_productSearchFragment_to_productChildFragment"
+            app:destination="@id/productChildFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/searchFragment"
+        android:name="com.example.aliwo.view.fragment.SearchFragment"
+        android:label="SearchFragment"
+        tools:layout="@layout/fragment_search">
+        <action
+            android:id="@+id/action_searchFragment_to_productSearchFragment"
+            app:destination="@id/productSearchFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/notificationFragment"
+        android:name="com.example.aliwo.view.fragment.NotificationFragment"
+        android:label="fragment_notification"
+        tools:layout="@layout/fragment_notification" />
+</navigation>

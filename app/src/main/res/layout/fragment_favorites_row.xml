@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="product"
+            type="com.example.aliwo.model.ProductFavoritesModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/recyclerRowFavoritesCardViewProduct"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="5dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginEnd="5dp"
+            android:layout_marginBottom="5dp"
+            app:cardCornerRadius="10dp"
+            app:cardElevation="2dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <ImageView
+                    android:id="@+id/recyclerRowFavoritesImvProduct"
+                    android:layout_width="120dp"
+                    android:layout_height="150dp"
+                    android:layout_marginStart="5dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginBottom="10dp"
+                    android:downloadUrl="@{product.image_url}"
+                    android:elevation="5dp"
+                    android:padding="5dp"
+                    android:scaleType="fitCenter"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_bias="0.0"
+                    tools:srcCompat="@tools:sample/avatars" />
+
+                <TextView
+                    android:id="@+id/recyclerRowFavoritesTxvProductName"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginEnd="20dp"
+                    android:ellipsize="end"
+                    android:maxLines="1"
+                    android:text="@{product.title}"
+                    android:textColor="@color/light_black"
+                    android:textSize="10sp"
+                    app:layout_constraintEnd_toStartOf="@+id/recyclerRowFavoritesView"
+                    app:layout_constraintStart_toEndOf="@+id/recyclerRowFavoritesImvProduct"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:ignore="SmallSp" />
+
+                <TextView
+                    android:id="@+id/recyclerRowFavoritesTxvPrice"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@{String.valueOf(product.price)}"
+                    android:textColor="@color/general_application_color"
+                    android:textSize="16sp"
+                    app:layout_constraintBottom_toBottomOf="@+id/recyclerRowFavoritesTgbAddBasket"
+                    app:layout_constraintStart_toStartOf="@+id/recyclerRowFavoritesTxvProductName"
+                    app:layout_constraintTop_toTopOf="@+id/recyclerRowFavoritesTgbAddBasket" />
+
+                <Button
+                    android:id="@+id/recyclerRowFavoritesBtnFavorites"
+                    android:layout_width="15dp"
+                    android:layout_height="15dp"
+                    android:background="@drawable/asset_favorites_red"
+                    app:layout_constraintBottom_toBottomOf="@+id/recyclerRowFavoritesView"
+                    app:layout_constraintEnd_toEndOf="@+id/recyclerRowFavoritesView"
+                    app:layout_constraintStart_toStartOf="@+id/recyclerRowFavoritesView"
+                    app:layout_constraintTop_toTopOf="@+id/recyclerRowFavoritesView" />
+
+                <View
+                    android:id="@+id/recyclerRowFavoritesView"
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginEnd="10dp"
+                    android:background="@drawable/favorites_background_shape"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <RatingBar
+                    android:id="@+id/recyclerRowFavoritesRtbStar"
+                    style="?android:attr/ratingBarStyleSmall"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginTop="5dp"
+                    android:numStars="5"
+                    android:progressTint="@color/general_application_color"
+                    android:rating="@{product.rate}"
+                    app:layout_constraintStart_toEndOf="@+id/recyclerRowFavoritesImvProduct"
+                    app:layout_constraintTop_toBottomOf="@+id/recyclerRowFavoritesTxvProductName" />
+
+                <TextView
+                    android:id="@+id/recyclerRowFavoritesTxvRating"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@{String.valueOf(product.rate)}"
+                    android:textColor="@color/black"
+                    android:textSize="10sp"
+                    app:layout_constraintBottom_toBottomOf="@+id/recyclerRowFavoritesRtbStar"
+                    app:layout_constraintStart_toEndOf="@+id/recyclerRowFavoritesRtbStar"
+                    app:layout_constraintTop_toTopOf="@+id/recyclerRowFavoritesRtbStar" />
+
+                <ToggleButton
+                    android:id="@+id/recyclerRowFavoritesTgbAddBasket"
+                    android:layout_width="0dp"
+                    android:layout_height="30dp"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginEnd="10dp"
+                    android:background="@drawable/add_basket_button_rectangle_selector"
+                    android:textAllCaps="false"
+                    android:textColor="@color/light_black"
+                    android:textOff="@string/add_basket"
+                    android:textOn="@string/added_basket"
+                    android:textSize="16sp"
+                    app:layout_constraintBottom_toBottomOf="@+id/recyclerRowFavoritesImvProduct"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/recyclerRowFavoritesTxvPrice" />
+
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </androidx.cardview.widget.CardView>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

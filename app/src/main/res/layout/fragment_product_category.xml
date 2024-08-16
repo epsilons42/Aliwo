@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.example.view.fragment.ProductCategoryFragment">
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/fragmentProductCategoryAllToolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/toolbar"
+        android:elevation="5dp"
+        android:minHeight="?attr/actionBarSize"
+        android:theme="?attr/actionBarTheme"
+        app:layout_constraintTop_toTopOf="parent"
+        app:titleTextColor="@color/light_black"
+        tools:layout_editor_absoluteX="1dp"
+        app:titleTextAppearance="@style/Toolbar.TitleText"/>
+
+    <Button
+        android:id="@+id/fragmentProductCategoryAllBtnSort"
+        android:layout_width="wrap_content"
+        android:layout_height="30dp"
+        android:layout_marginStart="5dp"
+        android:layout_marginTop="5dp"
+        android:background="@drawable/sort_button_shape"
+        android:drawableStart="@drawable/asset_sort"
+        android:minWidth="75dp"
+        android:paddingLeft="5dp"
+        android:paddingRight="10dp"
+        android:text="@string/sort"
+        android:textAlignment="viewStart"
+        android:textAllCaps="false"
+        android:textColor="@color/light_black"
+        android:visibility="gone"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/fragmentProductCategoryAllToolbar"
+        tools:ignore="RtlSymmetry" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/fragmentProductCategoryAllRecyclerView"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="5dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/fragmentProductCategoryAllBtnSort" />
+
+    <ProgressBar
+        android:id="@+id/fragmentProductCategoryAllPgb"
+        style="@style/ProgressBar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/fragmentProductCategoryAllRecyclerView"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/fragmentProductCategoryAllToolbar" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

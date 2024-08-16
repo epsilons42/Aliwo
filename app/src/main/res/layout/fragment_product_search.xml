@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".view.fragment.ProductSearchFragment">
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/fragmentProductSearchToolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/toolbar"
+        android:elevation="4dp"
+        android:minHeight="?attr/actionBarSize"
+        android:theme="?attr/actionBarTheme"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:layout_editor_absoluteX="1dp" />
+
+    <TextView
+        android:id="@+id/fragmentProductSearchTxv"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="5dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginEnd="5dp"
+        android:layout_marginBottom="5dp"
+        android:background="@drawable/edittext_shape"
+        android:elevation="5dp"
+        android:gravity="center"
+        android:paddingStart="15dp"
+        android:textAlignment="textStart"
+        android:textColor="@color/black"
+        android:textSize="14dp"
+        android:maxLines="1"
+        android:ellipsize="end"
+        app:layout_constraintBottom_toBottomOf="@+id/fragmentProductSearchToolbar"
+        app:layout_constraintEnd_toEndOf="@+id/fragmentProductSearchToolbar"
+        app:layout_constraintStart_toEndOf="@+id/fragmentProductSearchImb"
+        app:layout_constraintTop_toTopOf="@+id/fragmentProductSearchToolbar"
+        tools:ignore="RtlCompat" />
+
+    <Button
+        android:id="@+id/fragmentProductSearchBtnSort"
+        android:layout_width="wrap_content"
+        android:layout_height="30dp"
+        android:layout_marginStart="5dp"
+        android:layout_marginTop="5dp"
+        android:background="@drawable/sort_button_shape"
+        android:drawableStart="@drawable/asset_sort"
+        android:minWidth="75dp"
+        android:paddingLeft="5dp"
+        android:paddingRight="10dp"
+        android:text="@string/sort"
+        android:textAlignment="viewStart"
+        android:textAllCaps="false"
+        android:textColor="@color/light_black"
+        android:visibility="gone"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/fragmentProductSearchToolbar"
+        tools:ignore="RtlSymmetry" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/fragmentProductSearchRecyclerView"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/fragmentProductSearchBtnSort"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <ProgressBar
+        android:id="@+id/fragmentProductSearchPgb"
+        style="@style/ProgressBar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/fragmentProductSearchToolbar" />
+
+    <ImageButton
+        android:id="@+id/fragmentProductSearchImb"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:background="@android:color/transparent"
+        android:elevation="5dp"
+        android:padding="5dp"
+        android:src="@drawable/asset_back_button"
+        app:layout_constraintBottom_toBottomOf="@+id/fragmentProductSearchToolbar"
+        app:layout_constraintStart_toStartOf="@+id/fragmentProductSearchToolbar"
+        app:layout_constraintTop_toTopOf="@+id/fragmentProductSearchToolbar" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

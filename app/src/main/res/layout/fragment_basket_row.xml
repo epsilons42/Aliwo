@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <variable
+            name="product"
+            type="com.example.aliwo.model.ProductBasketModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/recyclerRowBasketCardViewProduct"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="5dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginEnd="5dp"
+            android:layout_marginBottom="5dp"
+            app:cardCornerRadius="10dp"
+            app:cardElevation="2dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <Button
+                    android:id="@+id/recyclerRowBasketBtnDelete"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:layout_marginEnd="5dp"
+                    android:background="@drawable/asset_delete"
+                    app:layout_constraintBottom_toBottomOf="@+id/recyclerRowBasketTxvPrice"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="@+id/recyclerRowBasketTxvPrice" />
+
+                <TextView
+                    android:id="@+id/recyclerRowBasketTxvCount"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="5dp"
+                    android:maxLines="1"
+                    android:paddingStart="2dp"
+                    android:textAlignment="center"
+                    android:textSize="16sp"
+                    android:text="@{String.valueOf(product.count)}"
+                    app:layout_constraintBottom_toBottomOf="@+id/recyclerRowBasketTxvPrice"
+                    app:layout_constraintEnd_toStartOf="@+id/recyclerRowBasketBtnIncrease"
+                    app:layout_constraintTop_toTopOf="@+id/recyclerRowBasketTxvPrice" />
+
+                <Button
+                    android:id="@+id/recyclerRowBasketBtnDecrease"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:layout_marginEnd="5dp"
+                    android:background="@drawable/piece_increase_decrease_button_shape"
+                    android:text="-"
+                    android:textSize="10sp"
+                    android:textStyle="bold"
+                    app:layout_constraintBottom_toBottomOf="@+id/recyclerRowBasketTxvPrice"
+                    app:layout_constraintEnd_toStartOf="@+id/recyclerRowBasketTxvCount"
+                    app:layout_constraintTop_toTopOf="@+id/recyclerRowBasketTxvPrice" />
+
+                <Button
+                    android:id="@+id/recyclerRowBasketBtnIncrease"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:layout_marginEnd="5dp"
+                    android:background="@drawable/piece_increase_decrease_button_shape"
+                    android:text="+"
+                    android:textSize="10sp"
+                    android:textStyle="bold"
+                    app:layout_constraintBottom_toBottomOf="@+id/recyclerRowBasketTxvPrice"
+                    app:layout_constraintEnd_toStartOf="@+id/recyclerRowBasketBtnDelete"
+                    app:layout_constraintTop_toTopOf="@+id/recyclerRowBasketTxvPrice" />
+
+                <ImageView
+                    android:id="@+id/recyclerRowBasketImvProduct"
+                    android:layout_width="120dp"
+                    android:layout_height="150dp"
+                    android:layout_marginStart="5dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginBottom="10dp"
+                    android:downloadUrl="@{product.image_url}"
+                    android:elevation="5dp"
+                    android:padding="5dp"
+                    android:scaleType="fitCenter"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_bias="0.0"
+                    tools:srcCompat="@tools:sample/avatars" />
+
+                <TextView
+                    android:id="@+id/recyclerRowBasketTxvProductName"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginEnd="10dp"
+                    android:ellipsize="end"
+                    android:maxLines="1"
+                    android:text="@{product.title}"
+                    android:textColor="@color/light_black"
+                    android:textSize="10sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/recyclerRowBasketImvProduct"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:ignore="SmallSp" />
+
+                <TextView
+                    android:id="@+id/recyclerRowBasketTxvPrice"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="20dp"
+                    android:text="@{String.valueOf(product.price)}"
+                    android:textColor="@color/general_application_color"
+                    android:textSize="16sp"
+                    app:layout_constraintBottom_toBottomOf="@+id/recyclerRowBasketImvProduct"
+                    app:layout_constraintEnd_toStartOf="@+id/recyclerRowBasketBtnDecrease"
+                    app:layout_constraintStart_toStartOf="@+id/recyclerRowBasketTxvProductName"
+                    tools:ignore="MissingConstraints" />
+
+                <RatingBar
+                    android:id="@+id/recyclerRowBasketRtbStar"
+                    style="?android:attr/ratingBarStyleSmall"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginTop="5dp"
+                    android:numStars="5"
+                    android:progressTint="@color/general_application_color"
+                    android:rating="@{product.rate}"
+                    app:layout_constraintStart_toEndOf="@+id/recyclerRowBasketImvProduct"
+                    app:layout_constraintTop_toBottomOf="@+id/recyclerRowBasketTxvProductName" />
+
+                <TextView
+                    android:id="@+id/recyclerRowBasketTxvRating"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@{String.valueOf(product.rate)}"
+                    android:textColor="@color/black"
+                    android:textSize="10sp"
+                    app:layout_constraintBottom_toBottomOf="@+id/recyclerRowBasketRtbStar"
+                    app:layout_constraintStart_toEndOf="@+id/recyclerRowBasketRtbStar"
+                    app:layout_constraintTop_toTopOf="@+id/recyclerRowBasketRtbStar" />
+
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </androidx.cardview.widget.CardView>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".view.fragment.ProductChildFragment">
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/fragmentProductChildToolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/toolbar"
+        android:elevation="5dp"
+        android:minHeight="?attr/actionBarSize"
+        android:theme="?attr/actionBarTheme"
+        android:visibility="visible"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:layout_editor_absoluteX="1dp" />
+
+    <SearchView
+        android:id="@+id/fragmentProductChildSearchView"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="5dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginEnd="10dp"
+        android:layout_marginBottom="5dp"
+        android:background="@drawable/edittext_shape"
+        android:elevation="5dp"
+        android:iconifiedByDefault="false"
+        android:queryHint="@string/search_category"
+        android:theme="@style/AppSearchView"
+        android:visibility="visible"
+        app:layout_constraintBottom_toBottomOf="@+id/fragmentProductChildToolbar"
+        app:layout_constraintEnd_toStartOf="@+id/fragmentProductChildImbNotification"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/fragmentProductChildToolbar" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/fragmentProductChildRecyclerView"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:visibility="visible"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/fragmentProductChildToolbar" />
+
+    <ProgressBar
+        android:id="@+id/fragmentProductChildPgb"
+        style="@style/ProgressBar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="@+id/fragmentProductChildRecyclerView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/fragmentProductChildRecyclerView"
+        app:layout_constraintTop_toTopOf="@+id/fragmentProductChildRecyclerView" />
+
+    <ImageButton
+        android:id="@+id/fragmentProductChildImbNotification"
+        android:layout_width="25dp"
+        android:layout_height="25dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginEnd="10dp"
+        android:layout_marginBottom="5dp"
+        android:background="@android:color/transparent"
+        android:elevation="5dp"
+        android:scaleType="fitCenter"
+        android:src="@drawable/asset_notification"
+        android:visibility="visible"
+        app:layout_constraintBottom_toBottomOf="@+id/fragmentProductChildToolbar"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/fragmentProductChildImvWrong"
+        android:layout_width="120dp"
+        android:layout_height="120dp"
+        android:layout_marginBottom="50dp"
+        android:scaleType="fitCenter"
+        android:src="@drawable/sorry_wrong"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/fragmentProductChildTxvWrong"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="15dp"
+        android:layout_marginEnd="30dp"
+        android:text="@string/sorry_wrong"
+        android:textSize="16sp"
+        android:visibility="gone"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/fragmentProductChildImvWrong" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

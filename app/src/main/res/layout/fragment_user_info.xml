@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".view.fragment.UserInfoFragment">
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/fragmentUserInfoToolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="?attr/colorPrimary"
+        android:elevation="5dp"
+        android:minHeight="?attr/actionBarSize"
+        android:theme="?attr/actionBarTheme"
+        app:titleTextColor="@color/light_black"
+        tools:layout_editor_absoluteX="1dp"
+        app:titleTextAppearance="@style/Toolbar.TitleText"
+        tools:ignore="MissingConstraints" />
+
+    <TextView
+        android:id="@+id/fragmentUserInfoTxvNameTittle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="40dp"
+        android:text="@string/first_name"
+        android:textColor="@color/black"
+        app:layout_constraintStart_toStartOf="@+id/fragmentUserInfoEdtName"
+        app:layout_constraintTop_toBottomOf="@+id/fragmentUserInfoToolbar" />
+
+    <EditText
+        android:id="@+id/fragmentUserInfoEdtName"
+        android:layout_width="0dp"
+        android:layout_height="60dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="2dp"
+        android:layout_marginEnd="5dp"
+        android:background="@drawable/edittext_shape"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:maxLength="50"
+        android:paddingStart="10dp"
+        app:layout_constraintEnd_toStartOf="@+id/fragmentUserInfoEdtLastName"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/fragmentUserInfoTxvNameTittle"
+        tools:ignore="NotSibling" />
+
+    <TextView
+        android:id="@+id/fragmentUserInfoTxvLastNameTittle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:text="@string/last_name"
+        android:textColor="@color/black"
+        app:layout_constraintStart_toStartOf="@+id/fragmentUserInfoEdtLastName"
+        app:layout_constraintTop_toTopOf="@+id/fragmentUserInfoTxvNameTittle" />
+
+    <EditText
+        android:id="@+id/fragmentUserInfoEdtLastName"
+        android:layout_width="0dp"
+        android:layout_height="60dp"
+        android:layout_marginStart="5dp"
+        android:layout_marginTop="2dp"
+        android:layout_marginEnd="20dp"
+        android:background="@drawable/edittext_shape"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:maxLength="50"
+        android:paddingStart="10dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/fragmentUserInfoEdtName"
+        app:layout_constraintTop_toBottomOf="@+id/fragmentUserInfoTxvLastNameTittle" />
+
+    <TextView
+        android:id="@+id/fragmentUserInfoTxvEmailTittle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="10dp"
+        android:text="@string/email"
+        android:textColor="@color/black"
+        app:layout_constraintStart_toStartOf="@+id/fragmentUserInfoTxvEmail"
+        app:layout_constraintTop_toBottomOf="@+id/fragmentUserInfoEdtName" />
+
+    <TextView
+        android:id="@+id/fragmentUserInfoTxvEmail"
+        android:layout_width="0dp"
+        android:layout_height="60dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="2dp"
+        android:layout_marginEnd="20dp"
+        android:background="@drawable/edittext_shape"
+        android:gravity="center"
+        android:paddingStart="10dp"
+        android:textAlignment="textStart"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/fragmentUserInfoTxvEmailTittle" />
+
+    <TextView
+        android:id="@+id/fragmentUserInfoTxvPhoneTittle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="10dp"
+        android:text="@string/phone"
+        android:textColor="@color/black"
+        app:layout_constraintStart_toStartOf="@+id/fragmentUserInfoEdtPhone"
+        app:layout_constraintTop_toBottomOf="@+id/fragmentUserInfoTxvEmail" />
+
+    <EditText
+        android:id="@+id/fragmentUserInfoEdtPhone"
+        android:layout_width="0dp"
+        android:layout_height="60dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="2dp"
+        android:layout_marginEnd="20dp"
+        android:background="@drawable/edittext_shape"
+        android:ems="10"
+        android:inputType="number"
+        android:maxLength="15"
+        android:paddingStart="10dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/fragmentUserInfoTxvPhoneTittle" />
+
+    <Button
+        android:id="@+id/fragmentUserInfoBtnUpdateInfo"
+        android:layout_width="331dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="40dp"
+        android:layout_marginTop="50dp"
+        android:layout_marginEnd="40dp"
+        android:background="@color/grey"
+        android:text="@string/update_info"
+        android:textAllCaps="false"
+        android:textColor="@color/white"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/fragmentUserInfoEdtPhone" />
+</androidx.constraintlayout.widget.ConstraintLayout>

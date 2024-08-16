@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/navigation_profile"
+    app:startDestination="@id/profileChildFragment">
+
+    <action
+        android:id="@+id/action_accountSettingsFragment_to_changeEmailFragment"
+        app:destination="@id/changeEmailFragment" />
+    <action
+        android:id="@+id/action_accountSettingsFragment_to_emailVerificationFragment"
+        app:destination="@id/emailVerificationFragment" />
+    <fragment
+        android:id="@+id/accountSettingsFragment"
+        android:name="com.example.aliwo.view.fragment.AccountSettingsFragment"
+        android:label="fragment_account_settings"
+        tools:layout="@layout/fragment_account_settings">
+        <action
+            android:id="@+id/action_accountSettingsFragment_to_changeEmailFragment"
+            app:destination="@id/changeEmailFragment" />
+        <action
+            android:id="@+id/action_accountSettingsFragment_to_changePasswordFragment"
+            app:destination="@id/changePasswordFragment" />
+        <action
+            android:id="@+id/action_accountSettingsFragment_to_disableDeleteAccountFragment"
+            app:destination="@id/disableDeleteAccountFragment" />
+        <action
+            android:id="@+id/action_accountSettingsFragment_to_emailVerificationFragment"
+            app:destination="@id/emailVerificationFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/disableDeleteAccountFragment"
+        android:name="com.example.aliwo.view.fragment.DeleteAccountFragment"
+        android:label="fragment_disable_delete_account"
+        tools:layout="@layout/fragment_delete_account" />
+    <fragment
+        android:id="@+id/emailVerificationFragment"
+        android:name="com.example.aliwo.view.fragment.EmailVerificationFragment"
+        android:label="fragment_email_verification"
+        tools:layout="@layout/fragment_email_verification" />
+    <fragment
+        android:id="@+id/userInfoFragment"
+        android:name="com.example.aliwo.view.fragment.UserInfoFragment"
+        android:label="fragment_user_info"
+        tools:layout="@layout/fragment_user_info" />
+    <fragment
+        android:id="@+id/changeEmailFragment"
+        android:name="com.example.aliwo.view.fragment.ChangeEmailFragment"
+        android:label="fragment_change_email"
+        tools:layout="@layout/fragment_change_email">
+        <action
+            android:id="@+id/action_changeEmailFragment_to_emailVerificationFragment"
+            app:destination="@id/emailVerificationFragment" />
+    </fragment>
+    <action
+        android:id="@+id/action_accountSettingsFragment_to_disableDeleteAccountFragment"
+        app:destination="@id/disableDeleteAccountFragment" />
+    <action
+        android:id="@+id/action_changePasswordFragment_to_emailVerificationFragment"
+        app:destination="@id/emailVerificationFragment" />
+    <fragment
+        android:id="@+id/changePasswordFragment"
+        android:name="com.example.aliwo.view.fragment.ChangePasswordFragment"
+        android:label="fragment_change_password"
+        tools:layout="@layout/fragment_change_password">
+        <action
+            android:id="@+id/action_changePasswordFragment_to_emailVerificationFragment"
+            app:destination="@id/emailVerificationFragment" />
+    </fragment>
+    <action
+        android:id="@+id/action_accountSettingsFragment_to_changePasswordFragment"
+        app:destination="@id/changePasswordFragment" />
+    <action
+        android:id="@+id/action_changeEmailFragment_to_emailVerificationFragment"
+        app:destination="@id/emailVerificationFragment" />
+    <fragment
+        android:id="@+id/profileChildFragment"
+        android:name="com.example.aliwo.view.fragment.ProfileChildFragment"
+        android:label="fragment_profile_child"
+        tools:layout="@layout/fragment_profile_child" >
+        <action
+            android:id="@+id/action_profileChildFragment_to_userInfoFragment"
+            app:destination="@id/userInfoFragment" />
+        <action
+            android:id="@+id/action_profileChildFragment_to_accountSettingsFragment"
+            app:destination="@id/accountSettingsFragment" />
+    </fragment>
+</navigation>
