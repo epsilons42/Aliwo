@@ -1,7 +1,7 @@
 package com.example.aliwo.service.firebasedao
 
 import android.content.Context
-import android.widget.Toast
+import com.example.aliwo.listener.firebaselistener.IUpdateListener
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 
@@ -12,12 +12,14 @@ class FirebaseDataUpdater {
         context: Context,
         currentUserUid: String,
         field: String,
-        value: String
+        value: String,
+        calback: IUpdateListener
     ) {
         firebaseFireStoreDB.collection("Users").document(currentUserUid)
             .update(field, value).addOnSuccessListener {
+                calback.userInfoUpdateListener(true)
             }.addOnFailureListener { exception ->
-                Toast.makeText(context, exception.localizedMessage, Toast.LENGTH_SHORT).show()
+                calback.userInfoUpdateListener(false)
             }
     }
 
@@ -25,18 +27,19 @@ class FirebaseDataUpdater {
         context: Context,
         userName: String,
         userLastName: String,
-        userPhone: String
+        userPhone: String,
+        calback: IUpdateListener
     ) {
         firebaseAuth = FirebaseAuth.getInstance()
         val currentUserUid = firebaseAuth.currentUser!!.uid
         updateFirestoreUserInfo(context, currentUserUid, "name", userName.replaceFirstChar {
             it.uppercase()
-        })
+        },calback)
 
         updateFirestoreUserInfo(context, currentUserUid, "lastName", userLastName.replaceFirstChar {
             it.uppercase()
-        })
-        updateFirestoreUserInfo(context, currentUserUid, "phone", userPhone)
+        },calback)
+        updateFirestoreUserInfo(context, currentUserUid, "phone", userPhone,calback)
     }
 
 }
