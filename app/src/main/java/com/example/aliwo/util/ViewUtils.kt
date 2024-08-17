@@ -2,7 +2,6 @@ package com.example.aliwo.util
 
 import android.graphics.drawable.Drawable
 import android.widget.Button
-import android.widget.EditText
 import android.widget.ImageView
 import androidx.appcompat.widget.Toolbar
 import androidx.core.content.ContextCompat
@@ -40,17 +39,4 @@ fun Button.setDrawableLeft(resourceId: Int) {
 
 private fun setIntrinsicBounds(drawable: Drawable?) {
     drawable?.setBounds(0, 0, drawable.intrinsicWidth, drawable.intrinsicHeight)
-}
-
-fun EditText.emptyControlAndAddText(str: String?) {
-    if (str != "") {
-        setText(str)
-        setBackgroundResource(
-            R.drawable.edittext_shape
-        )
-    } else {
-        setBackgroundResource(
-            R.drawable.edittext_empty_shape
-        )
-    }
 }
