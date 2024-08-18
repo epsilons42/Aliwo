@@ -1,5 +1,6 @@
 package com.example.aliwo.view.fragment
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -9,33 +10,54 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.aliwo.adapters.BasketAdapter
 import com.example.aliwo.databinding.FragmentBasketBinding
+import com.example.aliwo.listener.IOnChangeAmount
+import com.example.aliwo.model.ProductBasketModel
 import com.example.aliwo.viewmodel.BasketViewModel
 
 class BasketFragment : Fragment() {
     private lateinit var viewBinding: FragmentBasketBinding
     private lateinit var basketViewModel: BasketViewModel
+    private val productBasketArray = ArrayList<ProductBasketModel>()
 
+    @SuppressLint("SuspiciousIndentation")
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?,
     ): View {
         viewBinding = FragmentBasketBinding.inflate(inflater, container, false)
-        basketViewModel = ViewModelProvider(this).get(BasketViewModel::class.java)
+        basketViewModel = ViewModelProvider(this)[BasketViewModel::class.java]
         basketViewModel.controlCurrentUser()
         viewModelObserve()
-
         return viewBinding.root
-
     }
+
     fun viewModelObserve() {
         basketViewModel.productMLD.observe(viewLifecycleOwner) { product ->
             product?.let {
-                viewBinding.fragmentBasketRecyclerView.adapter =
-                    BasketAdapter(requireContext(), it,requireActivity())
-                viewBinding.fragmentBasketRecyclerView.layoutManager =
-                    LinearLayoutManager(requireContext())
-
+                if (productBasketArray.size == 0) {
+                    val onchangeAmount = object : IOnChangeAmount {
+                        @SuppressLint("SetTextI18n")
+                        override fun onChange(totalPrice: Double) {
+                            val stringFormat = String.format("%.2f", totalPrice)
+                            viewBinding.fragmentBasketTxvTotalPrice.text = stringFormat
+                            if (totalPrice != 0.0) {
+                                viewBinding.fragmentBasketCardViewPrice.visibility = View.VISIBLE
+                            } else {
+                                viewBinding.fragmentBasketCardViewPrice.visibility = View.GONE
+                            }
+                        }
+                    }
+                    viewBinding.fragmentBasketRecyclerView.adapter =
+                        BasketAdapter(
+                            requireContext(),
+                            it,
+                            requireActivity(),
+                            onchangeAmount
+                        )
+                    viewBinding.fragmentBasketRecyclerView.layoutManager =
+                        LinearLayoutManager(requireContext())
+                }
             }
         }
     }

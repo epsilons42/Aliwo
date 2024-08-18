@@ -42,4 +42,21 @@ class FirebaseDataUpdater {
         updateFirestoreUserInfo(context, currentUserUid, "phone", userPhone,calback)
     }
 
+    fun updateFireStoreBasketCount(currentProductId: Long, count: Int,calback : IUpdateListener) {
+        firebaseAuth = FirebaseAuth.getInstance()
+        val map = mapOf(
+            "$currentProductId.count" to count
+        )
+        val basketHashMap = HashMap<String, Map<String, Any>>()
+        basketHashMap.put(currentProductId.toString(), map)
+        val currentUserUid = firebaseAuth.currentUser!!.uid
+        firebaseFireStoreDB.collection("Basket").document(currentUserUid)
+            .update(
+                map
+            ).addOnSuccessListener {
+                calback.userInfoUpdateListener(true)
+            }.addOnFailureListener {
+                calback.userInfoUpdateListener(false)
+            }
+    }
 }
