@@ -3,13 +3,13 @@ package com.example.aliwo.model
 import com.google.firebase.Timestamp
 
 data class ProductBasketModel(
-    val id: Long,
-    val title: String,
-    val price: Double,
-    val image_url: String,
-    val category: String,
-    val description: String,
-    val rate: Float,
-    val count: Int,
-    val timestamp: Timestamp
+    var id: Long,
+    var title: String,
+    var price: Double,
+    var image_url: String,
+    var category: String,
+    var description: String,
+    var rate: Float,
+    var count: Int,
+    var timestamp: Timestamp
 )

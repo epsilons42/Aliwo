@@ -1,5 +1,5 @@
 package com.example.aliwo.listener
 
 interface IOnChangeAmount {
-    fun onChange(totalPrice: String);
+    fun onChange(totalPrice: Double)
 }
