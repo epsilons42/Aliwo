@@ -85,7 +85,7 @@
                         android:layout_height="40dp"
                         android:layout_marginTop="10dp"
                         android:layout_marginEnd="10dp"
-                        android:background="@drawable/favorites_background_shape"
+                        android:background="@drawable/grey_oval_background_shape"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />
 

@@ -62,6 +62,9 @@
         <action
             android:id="@+id/action_productDetailFragment_to_productSearchFragment"
             app:destination="@id/productSearchFragment" />
+        <action
+            android:id="@+id/action_productDetailFragment_to_productImageDetailFragment"
+            app:destination="@id/productImageDetailFragment" />
     </fragment>
     <fragment
         android:id="@+id/productSearchFragment"
@@ -71,5 +74,17 @@
         <argument
             android:name="category"
             app:argType="string" />
+    </fragment>
+    <fragment
+        android:id="@+id/productImageDetailFragment"
+        android:name="com.example.aliwo.view.fragment.ProductImageDetailFragment"
+        android:label="fragment_product_photo_detail"
+        tools:layout="@layout/fragment_product_image_detail" >
+        <argument
+            android:name="imageUrlList"
+            app:argType="string[]" />
+        <argument
+            android:name="position"
+            app:argType="integer" />
     </fragment>
 </navigation>
