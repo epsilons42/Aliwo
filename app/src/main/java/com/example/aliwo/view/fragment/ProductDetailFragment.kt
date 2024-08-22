@@ -44,15 +44,18 @@ class ProductDetailFragment : Fragment() {
 
     override fun onPause() {
         super.onPause()
-        val mainBottomNavigationView = requireActivity().findViewById<BottomNavigationView>(R.id.activityMainBottomNavigationView)
+        val mainBottomNavigationView =
+            requireActivity().findViewById<BottomNavigationView>(R.id.activityMainBottomNavigationView)
         mainBottomNavigationView.visibility = View.VISIBLE
     }
 
     override fun onStart() {
         super.onStart()
-        val mainBottomNavigationView = requireActivity().findViewById<BottomNavigationView>(R.id.activityMainBottomNavigationView)
+        val mainBottomNavigationView =
+            requireActivity().findViewById<BottomNavigationView>(R.id.activityMainBottomNavigationView)
         mainBottomNavigationView.visibility = View.GONE
     }
+
     @SuppressLint("SuspiciousIndentation")
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -61,7 +64,6 @@ class ProductDetailFragment : Fragment() {
     ): View {
         dataBinding =
             DataBindingUtil.inflate(inflater, R.layout.fragment_product_detail, container, false)
-
 
         val bigDecimal = BigDecimal(bundle.price.toDouble()).setScale(
             2,
@@ -78,11 +80,40 @@ class ProductDetailFragment : Fragment() {
                 bundle.rate
             )
         )
-        dataBinding.product = productList.get(0)
+        dataBinding.product = productList[0]
+        visibilityActivities()
+        viewPager2Activities()
+        toolbarActions()
+        firebaseAndIntentActivities()
 
-        val favoritesTgb = dataBinding.fragmentProductDetailTgbAddFavorites
-        val basketTgb = dataBinding.fragmentProductDetailTgbAddBasket
 
+        dataBinding.fragmentProductDetailTxvCategory.setOnClickListener {
+            val navDirections =
+                ProductDetailFragmentDirections.actionProductDetailFragmentToProductSearchFragment(
+                    bundle.category
+                )
+            Navigation.findNavController(it).navigate(navDirections)
+
+        }
+        return dataBinding.root
+    }
+
+    private fun viewPager2Activities() {
+        if (imageUrlList.size == 0) {
+            imageUrlList.add(bundle.image)
+            imageUrlList.add(bundle.image)
+            imageUrlList.add(bundle.image)
+        }
+
+        val viewPager2 = dataBinding.fragmentProductDetaiVP2
+        val tabLayout = dataBinding.fragmentProductDetailTBL
+        viewPager2.adapter = ProductDetailViewPager2Adapter(imageUrlList)
+
+        TabLayoutMediator(tabLayout, viewPager2) { _, _ ->
+        }.attach()
+    }
+
+    private fun visibilityActivities() {
         if (productList.size != 0) {
             dataBinding.fragmentProductDetailCl.visibility = View.VISIBLE
             dataBinding.fragmentProductDetailCardView.visibility = View.VISIBLE
@@ -92,6 +123,18 @@ class ProductDetailFragment : Fragment() {
             dataBinding.fragmentProductDetailCardView.visibility = View.GONE
             dataBinding.fragmentProductDetailPgb.visibility = View.VISIBLE
         }
+    }
+
+    private fun toolbarActions() {
+        val toolbar = dataBinding.fragmentProductDetailToolbar
+        toolbar.title = getString(R.string.product_detail)
+        toolbar.backIcon()
+        toolbar.navigationBackClick()
+    }
+
+    private fun firebaseAndIntentActivities() {
+        val favoritesTgb = dataBinding.fragmentProductDetailTgbAddFavorites
+        val basketTgb = dataBinding.fragmentProductDetailTgbAddBasket
 
         if (firebaseUserManager.currentUser()) {
             val listExistListener = object : IListExistListener {
@@ -104,7 +147,6 @@ class ProductDetailFragment : Fragment() {
                     addDataBasket(exists)
                     basketTgb.isChecked = exists
                 }
-
             }
             firebaseDataController.controlFireStoreDataBasket(
                 bundle.id, listExistListener
@@ -123,29 +165,6 @@ class ProductDetailFragment : Fragment() {
                 intentUtils.intentActivity(requireContext(), LoginSignUpActivity())
             }
         }
-        imageUrlList.add(bundle.image)
-        imageUrlList.add(bundle.image)
-        imageUrlList.add(bundle.image)
-        val viewPager2 = dataBinding.fragmentProductDetaiVP2
-        val tableLayout = dataBinding.fragmentProductDetailTBL
-       viewPager2.adapter = ProductDetailViewPager2Adapter(imageUrlList)
-
-        TabLayoutMediator(tableLayout, viewPager2) { tab, position ->
-
-        }.attach()
-
-
-
-        dataBinding.fragmentProductDetailTxvCategory.setOnClickListener {
-            val navDirections =
-                ProductDetailFragmentDirections.actionProductDetailFragmentToProductSearchFragment(
-                    bundle.category
-                )
-            Navigation.findNavController(it).navigate(navDirections)
-
-        }
-        toolbarActions()
-        return dataBinding.root
     }
 
     private fun addDataFavorites(existFavorites: Boolean) {
@@ -163,7 +182,7 @@ class ProductDetailFragment : Fragment() {
             "category" to bundle.category,
             "timestamp" to FieldValue.serverTimestamp()
         )
-        dataBinding.fragmentProductDetailTgbAddFavorites.setOnCheckedChangeListener { buttonView, isChecked ->
+        dataBinding.fragmentProductDetailTgbAddFavorites.setOnCheckedChangeListener { _, isChecked ->
 
             if (isChecked) {
                 if (!existFavorites) {
@@ -196,7 +215,7 @@ class ProductDetailFragment : Fragment() {
             "count" to 1,
             "timestamp" to FieldValue.serverTimestamp()
         )
-        dataBinding.fragmentProductDetailTgbAddBasket.setOnCheckedChangeListener { buttonView, isChecked ->
+        dataBinding.fragmentProductDetailTgbAddBasket.setOnCheckedChangeListener { _, isChecked ->
             uIUtil.badgeActivate(requireActivity())
             if (isChecked) {
                 if (!existBasket) {
@@ -210,12 +229,6 @@ class ProductDetailFragment : Fragment() {
             }
         }
 
-    }
-    private fun toolbarActions() {
-        val toolbar = dataBinding.fragmentProductDetailToolbar
-        toolbar.title = getString(R.string.product_detail)
-        toolbar.backIcon()
-        toolbar.navigationBackClick()
     }
 
 }

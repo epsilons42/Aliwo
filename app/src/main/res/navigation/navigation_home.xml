@@ -34,6 +34,9 @@
         <argument
             android:name="rate"
             app:argType="float" />
+        <action
+            android:id="@+id/action_productDetailFragment_to_productImageDetailFragment"
+            app:destination="@id/productImageDetailFragment" />
 
     </fragment>
     <fragment
@@ -98,4 +101,16 @@
         android:name="com.example.aliwo.view.fragment.NotificationFragment"
         android:label="fragment_notification"
         tools:layout="@layout/fragment_notification" />
+    <fragment
+        android:id="@+id/productImageDetailFragment"
+        android:name="com.example.aliwo.view.fragment.ProductImageDetailFragment"
+        android:label="fragment_product_photo_detail"
+        tools:layout="@layout/fragment_product_image_detail" >
+        <argument
+            android:name="imageUrlList"
+            app:argType="string[]" />
+        <argument
+            android:name="position"
+            app:argType="integer" />
+    </fragment>
 </navigation>
