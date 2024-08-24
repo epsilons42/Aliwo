@@ -37,21 +37,20 @@ class ProductChildFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         viewBinding = FragmentProductChildBinding.inflate(inflater, container, false)
-        productChildViewModel = ViewModelProvider(this).get(ProductChildViewModel::class.java)
+        productChildViewModel = ViewModelProvider(this)[ProductChildViewModel::class.java]
         productChildViewModel.productListSizeControl(requireContext())
         viewModelObserve()
         recyclerViewActions()
-        viewBinding.fragmentProductChildSearchView.setOnClickListener {
-            Navigation.findNavController(it)
-                .navigate(R.id.action_productChildFragment_to_searchFragment)
-        }
+        val network = networkUtils.isNetworkAvailable(requireContext())
+        networkControlAndVisibility(network)
+        goYoFragments()
 
-        viewBinding.fragmentProductChildImbNotification.setOnClickListener {
-            Navigation.findNavController(it)
-                .navigate(R.id.action_productChildFragment_to_notificationFragment)
-        }
+        return viewBinding.root
+    }
 
-        if (networkUtils.isNetworkAvailable(requireContext())) {
+    private fun networkControlAndVisibility(network: Boolean) {
+        if (network) {
+            goToFragmentDependsNetwork()
             viewBinding.fragmentProductChildPgb.visibility = View.VISIBLE
             viewBinding.fragmentProductChildImvWrong.visibility = View.GONE
             viewBinding.fragmentProductChildTxvWrong.visibility = View.GONE
@@ -63,21 +62,34 @@ class ProductChildFragment : Fragment() {
             viewBinding.fragmentProductChildTxvWrong.visibility = View.VISIBLE
             viewBinding.fragmentProductChildRecyclerView.visibility = View.GONE
         }
+    }
 
-
+    private fun goToFragmentDependsNetwork() {
+        viewBinding.fragmentProductChildSearchView.setOnClickListener {
+            Navigation.findNavController(it)
+                .navigate(R.id.action_productChildFragment_to_searchFragment)
+        }
         viewBinding.fragmentProductChildSearchView.setOnQueryTextFocusChangeListener { v, hasFocus ->
             if (hasFocus) {
                 Navigation.findNavController(v)
                     .navigate(R.id.action_productChildFragment_to_searchFragment)
             }
         }
-        return viewBinding.root
+    }
+
+    private fun goYoFragments() {
+        viewBinding.fragmentProductChildImbNotification.setOnClickListener {
+            Navigation.findNavController(it)
+                .navigate(R.id.action_productChildFragment_to_notificationFragment)
+        }
+
+
     }
 
     fun viewModelObserve() {
         productChildViewModel.productParentMLD.observe(viewLifecycleOwner) { product ->
             product?.let {
-                if(productChildArrayList.size == 0){
+                if (productChildArrayList.size == 0) {
                     productChildArrayList.addAll(it)
                     recyclerViewActions()
                 }
@@ -96,10 +108,10 @@ class ProductChildFragment : Fragment() {
 
     private fun recyclerViewActions() {
 
-            viewBinding.fragmentProductChildRecyclerView.adapter =
-                ProductParentAdapter(requireContext(), productChildArrayList)
-            viewBinding.fragmentProductChildRecyclerView.layoutManager =
-                LinearLayoutManager(requireContext())
+        viewBinding.fragmentProductChildRecyclerView.adapter =
+            ProductParentAdapter(requireContext(), productChildArrayList)
+        viewBinding.fragmentProductChildRecyclerView.layoutManager =
+            LinearLayoutManager(requireContext())
 
     }
 }
