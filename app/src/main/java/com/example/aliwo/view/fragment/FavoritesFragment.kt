@@ -8,7 +8,6 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
-
 import com.example.aliwo.adapterss.FavoritesAdapter
 import com.example.aliwo.databinding.FragmentFavoritesBinding
 import com.example.aliwo.view.activity.LoginSignUpActivity
@@ -30,20 +29,18 @@ class FavoritesFragment : Fragment() {
         savedInstanceState: Bundle?,
     ): View {
         viewBinding = FragmentFavoritesBinding.inflate(inflater, container, false)
-        favoritesViewModel = ViewModelProvider(this).get(FavoritesViewModel::class.java)
+        favoritesViewModel = ViewModelProvider(this)[FavoritesViewModel::class.java]
         favoritesViewModel.controlCurrentUser()
-        viewBinding.fragmentFavoritesBtnLogin.setOnClickListener {
-            intentUtils.intentActivity(requireContext(), LoginSignUpActivity())
-        }
+        goToActivity()
+        val network = networkUtils.isNetworkAvailable(requireContext())
+        networkControlAndVisibility(network)
 
-        if (networkUtils.isNetworkAvailable(requireContext())) {
-            if (firebaseUserManager.currentUser()) {
-                viewModelObserve()
-            } else {
-                viewBinding.fragmentFavoritesBtnLogin.visibility = View.VISIBLE
-                viewBinding.fragmentFavoritesImvBasket.visibility = View.VISIBLE
+        return viewBinding.root
+    }
 
-            }
+    private fun networkControlAndVisibility(network : Boolean){
+        if (network) {
+            currentUserControlAndVisibility()
             viewBinding.fragmentFavoritesImvWrong.visibility = View.GONE
             viewBinding.fragmentFavoritesTxvWrong.visibility = View.GONE
             viewBinding.fragmentFavoritesRecyclerView.visibility = View.VISIBLE
@@ -53,8 +50,21 @@ class FavoritesFragment : Fragment() {
             viewBinding.fragmentFavoritesTxvWrong.visibility = View.VISIBLE
             viewBinding.fragmentFavoritesRecyclerView.visibility = View.GONE
         }
+    }
+    private fun currentUserControlAndVisibility(){
+        //network true
+        if (firebaseUserManager.currentUser()) {
+            viewModelObserve()
+        } else {
+            viewBinding.fragmentFavoritesBtnLogin.visibility = View.VISIBLE
+            viewBinding.fragmentFavoritesImvBasket.visibility = View.VISIBLE
+        }
+    }
 
-        return viewBinding.root
+    private fun goToActivity(){
+        viewBinding.fragmentFavoritesBtnLogin.setOnClickListener {
+            intentUtils.intentActivity(requireContext(), LoginSignUpActivity())
+        }
     }
 
     fun viewModelObserve() {

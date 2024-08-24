@@ -12,12 +12,20 @@ import com.example.aliwo.adapters.BasketAdapter
 import com.example.aliwo.databinding.FragmentBasketBinding
 import com.example.aliwo.listener.IOnChangeAmount
 import com.example.aliwo.model.ProductBasketModel
+import com.example.aliwo.service.firebasedao.FirebaseUserManager
+import com.example.aliwo.util.IntentUtils
+import com.example.aliwo.util.NetworkUtils
+import com.example.aliwo.view.activity.LoginSignUpActivity
 import com.example.aliwo.viewmodel.BasketViewModel
 
 class BasketFragment : Fragment() {
     private lateinit var viewBinding: FragmentBasketBinding
     private lateinit var basketViewModel: BasketViewModel
     private val productBasketArray = ArrayList<ProductBasketModel>()
+    private val intentUtils = IntentUtils()
+    private val firebaseUserManager = FirebaseUserManager()
+    private val networkUtils = NetworkUtils()
+
 
     @SuppressLint("SuspiciousIndentation")
     override fun onCreateView(
@@ -28,8 +36,39 @@ class BasketFragment : Fragment() {
         viewBinding = FragmentBasketBinding.inflate(inflater, container, false)
         basketViewModel = ViewModelProvider(this)[BasketViewModel::class.java]
         basketViewModel.controlCurrentUser()
-        viewModelObserve()
+        goToActivity()
+        val network = networkUtils.isNetworkAvailable(requireContext())
+        networkControlAndVisibility(network)
         return viewBinding.root
+    }
+
+    private fun networkControlAndVisibility(network: Boolean) {
+        if (network) {
+            currentUserControlAndVisibility()
+            viewBinding.fragmentBasketImvWrong.visibility = View.GONE
+            viewBinding.fragmentBasketTxvWrong.visibility = View.GONE
+            viewBinding.fragmentBasketRecyclerView.visibility = View.VISIBLE
+
+        } else {
+            viewBinding.fragmentBasketImvWrong.visibility = View.VISIBLE
+            viewBinding.fragmentBasketTxvWrong.visibility = View.VISIBLE
+            viewBinding.fragmentBasketRecyclerView.visibility = View.GONE
+        }
+    }
+
+    private fun currentUserControlAndVisibility() {
+        if (firebaseUserManager.currentUser()) {
+            viewModelObserve()
+        } else {
+            viewBinding.fragmentBasketBtnLogin.visibility = View.VISIBLE
+            viewBinding.fragmentBasketImvBasket.visibility = View.VISIBLE
+        }
+    }
+
+    private fun goToActivity() {
+        viewBinding.fragmentBasketBtnLogin.setOnClickListener {
+            intentUtils.intentActivity(requireContext(), LoginSignUpActivity())
+        }
     }
 
     fun viewModelObserve() {
