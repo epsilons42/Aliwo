@@ -20,6 +20,7 @@ class SplashScreenActivity : AppCompatActivity() {
     fun toMainActivity(second: Long) {
         Handler(Looper.getMainLooper()).postDelayed({
             intentUtils.intentAndClear(this@SplashScreenActivity, MainActivity())
+            finish()
         }, second * 1000)
     }
 }
